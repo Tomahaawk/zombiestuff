@@ -1,0 +1,52 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-list-height {
+  max-width: 600px;
+  max-height: 300px;
+  overflow: scroll;
+}
+
+.App-survivor-info {
+  flex-direction: row;
+  display: flex;
+  padding: 15px;
+}
+
+.App-survivor-list {
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-height: 400px;
+  overflow: scroll;
+}
+
+.App-survivor-detail {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

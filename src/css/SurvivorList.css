@@ -1,0 +1,34 @@
+.Survivor-list-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.Survivor-list-container tr:hover {
+  background-color: #f6f6f6;
+}
+
+.Survivor-table-style {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+}
+
+.Survivor-table-header {
+  background-color: #f1f1f1;
+  text-align: left;
+}
+
+.Survivor-search-input {
+  width: inherit;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+.Survivor-table-container {
+  height: 400px;
+  width: 600px;
+  overflow: scroll;
+  overflow-x: hidden;
+}

@@ -1,0 +1,20 @@
+div.style {
+  display: flex;
+  border: 1px solid #333;
+  background-color: #222;
+  overflow: hidden;
+}
+
+div.style button{
+  background-color: inherit;
+  border: none;
+  padding: 15px;
+  transition: 0.3s;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+}
+
+div.style button:hover {
+  background-color: #4f4f4f;
+}

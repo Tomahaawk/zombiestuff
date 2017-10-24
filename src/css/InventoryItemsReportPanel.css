@@ -1,0 +1,25 @@
+.Container-iirp {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 5px;
+}
+
+.InfoBox-iirp {
+  padding: 5px;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.Description {
+  font-size: 100%;
+  font-weight: bold;
+}
+
+.InfoBox-inside-iirp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

@@ -1,0 +1,28 @@
+.Container {
+  display: flex;
+  justify-content: center;
+}
+
+.Form-container {
+  border: 1px solid;
+  width: 300px;
+  padding: 5px;
+  margin: 10px;
+}
+
+.Field-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  align-items: flex-start;
+
+}
+
+.Field-label {
+  font-size: small;
+}
+
+.Field-input {
+  padding: 5px;
+  width: 100%;
+}

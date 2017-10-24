@@ -1,0 +1,30 @@
+.Container-irp {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 5px;
+}
+
+.InfoBox-irp {
+  padding: 5px;
+  margin:5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.Description {
+  font-size: 100%;
+  font-weight: bold;
+}
+
+.Stats-infected {
+  font-size: 150%;
+  color: #f60b0b;
+
+}
+
+.Stats-non-infected {
+  font-size: 150%;
+  color: #82ca9d;
+}
