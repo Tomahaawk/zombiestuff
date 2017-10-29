@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Table, Card } from 'reactstrap';
 import { survivorsFetch } from '../actions';
 import SurvivorListItem from './SurvivorListItem';
 import SearchBar from './SearchBar';
@@ -14,23 +15,25 @@ class SurvivorList extends Component {
   render() {
 
     return (
-      <div className="Survivor-list-container">
-        <SearchBar />
-        <div className="Survivor-table-container">
-          <table className="Survivor-table-style" id="myTable">
-            <thead className="Survivor-table-header">
-              <tr>
-                <th style={{padding: 5}}>Name</th>
-                <th>Age</th>
-                <th>infected</th>
-              </tr>
-            </thead>
-            <tbody>
-              <SurvivorListItem survivors={this.props.survivorsList} onClick={this.props.onClick}/>
-            </tbody>
-          </table>
+      <Card style={{height: `auto`}}>
+        <div className="Survivor-list-container">
+          <SearchBar />
+          <div className="Survivor-table-container">
+            <Table inverse hover striped id="myTable">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>Infected</th>
+                </tr>
+              </thead>
+              <tbody>
+                <SurvivorListItem survivors={this.props.survivorsList} onClick={this.props.onClick}/>
+              </tbody>
+            </Table>
+          </div>
         </div>
-      </div>
+      </Card>
     );
   }
 }

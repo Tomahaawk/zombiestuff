@@ -2,11 +2,9 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding: 10px;
 }
 
-.Survivor-list-container tr:hover {
-  background-color: #f6f6f6;
-}
 
 .Survivor-table-style {
   width: 100%;
@@ -27,8 +25,8 @@
 }
 
 .Survivor-table-container {
-  height: 400px;
-  width: 600px;
+  height: 530px;
+  width: inherit;
   overflow: scroll;
   overflow-x: hidden;
 }

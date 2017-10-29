@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Modal from 'react-modal';
+import { Link } from 'react-router';
+import { Card, CardBody, CardTitle, CardSubtitle, Button, Input,
+  Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { reportInfected } from '../actions';
+import FullMap from './FullMap';
 
 class SurvivorInfoPanel extends Component {
   constructor(props) {
@@ -13,17 +16,38 @@ class SurvivorInfoPanel extends Component {
     };
   }
 
-//UPDATE STATES OF modalIsOpen e flggerId
+//UPDATE STATES OF modalIsOpen e flaggerId
   updateFlaggerId = (event) => {
     this.setState({flaggerId: event.target.value});
   }
 
-  openModal = () => {
-    this.setState({modalIsOpen: true});
+  toggleModal = () => {
+    this.setState({
+      modalIsOpen: !this.state.modalIsOpen
+    });
   }
 
-  closeModal = () => {
-    this.setState({modalIsOpen: false});
+  formatCoords = (lonLat) => {
+    //singleSurvivor.lonlat
+      const newLonLatString = lonLat.replace('POINT ', '').replace(/[()]/g, '');
+      const coordsString =  newLonLatString.split(" ");
+      const latitude = Number(coordsString[0]);
+      const longitude = Number(coordsString[1]);
+      const coords = {latitude, longitude};
+
+      return coords;
+
+  }
+
+  renderFullMap = (lonLat) => {
+    if(lonLat !== null && lonLat !== undefined) {
+      const coords = this.formatCoords(lonLat);
+      //console.log(coords);
+      return <FullMap input={coords} />;
+
+    } else {
+      return <text> Location Unknown </text>;
+    }
   }
 
   render() {
@@ -31,61 +55,45 @@ class SurvivorInfoPanel extends Component {
     const { singleSurvivor } = this.props;
     const infectedId = singleSurvivor.id;
     const flaggerId = this.state.flaggerId;
+    //const coords = this.formatCoords(singleSurvivor.lonlat);
 
     return(
-      <div styles={styles.containerStyle}>
-        <div style={styles.survivorInfoStyle}>
-          <p style={styles.pStyle}>
-            <text style={styles.textStyle}>SURVIVOR ID: </text>
-            <text>{singleSurvivor.id}</text>
-          </p>
-
-          <p style={styles.pStyle}>
-            <text style={styles.textStyle}>SURVIVOR NAME: </text>
-            <text>{singleSurvivor.name}</text>
-          </p>
-
-          <p style={styles.pStyle}>
-            <text style={styles.textStyle}>SURVIVOR LAST KNOWN LOCATION: </text>
-            <text>{singleSurvivor.lonlat}</text>
-          </p>
+      <div>
+        <div>
+          <Card>
+            <CardBody>
+              <div style={styles.innerCardStyle}>
+                <CardTitle>{singleSurvivor.name}</CardTitle>
+                <CardSubtitle>{singleSurvivor.id}</CardSubtitle>
+                <CardTitle style={{paddingTop: 20}}>Last known location</CardTitle>
+              </div>
+              <div style={{width: `100%`, height: `auto`, marginBottom: 20}}>
+                {this.renderFullMap(singleSurvivor.lonlat)}
+              </div>
+              <div>
+                <Button onClick={this.toggleModal} style={styles.buttonStyle}> Flag Infected </Button>
+                <Link to={`/edit-survivor/${singleSurvivor.location}`}><Button style={styles.buttonStyle}> Edit </Button></Link>
+              </div>
+            </CardBody>
+          </Card>
         </div>
 
         <div>
-        <p>
-            <button onClick={this.openModal}> Flag Infected </button>
-            <Modal
-              isOpen={this.state.modalIsOpen}
-              onRequestClose={this.closeModal}
-              style={modalStyle}
-            >
-              <div>
-                <text>Report {singleSurvivor.name} as indected</text>
-                <p>
-                  <text>Insert your ID to confirm your identity</text>
-                </p>
-                <input onChange={event => this.updateFlaggerId(event)} type="text" name="flaggerId"/>
-              </div>
-              <div>
-                <button onClick={this.props.flagInfected.bind(this, {infectedId, flaggerId})}>Report</button>
-              </div>
+            <Modal isOpen={this.state.modalIsOpen} toggle={this.toggleModal}>
+              <ModalHeader>Report {singleSurvivor.name} as infected</ModalHeader>
+              <ModalBody>
+                <text>Insert your ID to confirm your identity</text>
+                <Input onChange={event => this.updateFlaggerId(event)} type="text" name="flaggerId" />
+              </ModalBody>
+              <ModalFooter>
+                <Button onClick={this.props.flagInfected.bind(this, {infectedId, flaggerId})} >Report</Button>
+                <Button onClick={this.toggleModal}>Cancel</Button>
+              </ModalFooter>
             </Modal>
-          </p>
         </div>
 
     </div>
     );
-  }
-}
-
-//should be is a CSS file
-const modalStyle = {
-  content: {
-    top: '150px',
-    left: '250px',
-    right: '250px',
-    bottom: '150px',
-    padding: '20px'
   }
 }
 
@@ -95,6 +103,12 @@ const styles = {
     padding: 10,
   },
 
+  innerCardStyle: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'start'
+  },
+
   survivorInfoStyle: {
     display: 'flex',
     justifyContent: 'start',
@@ -102,12 +116,8 @@ const styles = {
     marginLeft: 100
   },
 
-  pStyle: {
-    textAlign: 'left',
-  },
-
-  textStyle: {
-    fontWeight: 'bold'
+  buttonStyle: {
+    margin: 5
   }
 
 }

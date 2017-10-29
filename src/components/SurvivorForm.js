@@ -1,121 +1,166 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Button, Form, Label, Alert } from 'reactstrap';
+import FullMap from './FullMap';
 import '../css/SurvivorForm.css';
 
-class SurvivorForm extends Component {
+const required = value => (value ? undefined : 'Required')
+const number = value => value && isNaN(Number(value)) ? 'Must be a number' : undefined
+const notZero = value =>  value < 0 ? 'Must be a valid number' : undefined
 
-  render() {
+const renderField = ({
+  input,
+  label,
+  placeholder,
+  type,
+  meta: { touched, error }
+}) => (
+  <div className="Field-container">
+    <Label className="Field-label">{label}</Label>
+    <input {...input} placeholder={placeholder} type={type} className="Field-input" />
+    { touched &&
+      ((error && <span style={{marginTop: 5, color: "red"}}>{error}</span>))}
+  </div>
+)
 
-    //NO FIELD VALIDATIONS ARE BEING MADE =d (yet)
-    const { handleSubmit } = this.props;
+const renderRadio = ({
+  input,
+  label,
+  type,
+  meta: { touched, error }
+}) => (
+  <div style={{margin: 5}}>
+    <input {...input} type={type} />
+    <Label style={{marginLeft: 5}}>{label}</Label>
+    { touched &&
+      ( (error && <span style={{marginTop: 5, color: "red"}}>{error}</span>) )}
+  </div>
+)
+
+
+let SurvivorForm = (props) => {
+  //render() {
+    const { handleSubmit } = props;
     return(
       <div className="Container">
-      <form onSubmit={handleSubmit} className="Form-container">
-        <div className="Field-container">
-          <label className="Field-label">Name</label>
+      <Form onSubmit={handleSubmit} className="Form-container">
+
+        <div>
           <Field
-              className="Field-input"
               name="name"
-              component="input"
+              component={renderField}
               type="text"
+              label="Name"
               placeholder="Survivor Name"
+              validate={[required]}
             />
         </div>
 
-        <div className="Field-container">
-          <label className="Field-label">Age</label>
+        <div>
             <Field
               className="Field-input"
               name="age"
-              component="input"
+              component={renderField}
               type="text"
+              label="Age"
               placeholder="Survivor Age"
+              validate={[required]}
             />
         </div>
 
         <div className="Field-container">
           <label className="Field-label">Sex</label>
-          <div>
-            <label>
-                <Field
-                  name="gender"
-                  component="input"
-                  type="radio"
-                  value="M"
-                />
-                Male
-            </label>
-
-            <label>
-                <Field
-                  name="gender"
-                  component="input"
-                  type="radio"
-                  value="F"
-                />
-                Female
-            </label>
+          <div className="Field-container-sex">
+              <Field
+                name="gender"
+                component={renderRadio}
+                type="radio"
+                value="M"
+                label="Male"
+              />
+              <Field
+                name="gender"
+                component={renderRadio}
+                type="radio"
+                value="F"
+                label="Female"
+                validate={[required]}
+              />
           </div>
         </div>
 
         <label style={{fontSize: 'medium', fontWeight: 'bold', marginTop: 10}}>Inventory Items</label>
         <div>
 
-            <div className="Field-container">
-              <label className="Field-label">Water</label>
+            <div>
                 <Field
                   className="Field-input"
+                  component={renderField}
+                  label="Water"
                   name="water"
-                  component="input"
                   type="number"
                   placeholder="Quantity"
+                  validate={[required, number, notZero]}
                 />
             </div>
 
-            <div className="Field-container">
-              <label className="Field-label">Food</label>
+            <div>
                 <Field
                   className="Field-input"
+                  component={renderField}
+                  label="Food"
                   name="food"
-                  component="input"
                   type="number"
                   placeholder="Quantity"
+                  validate={[required, number, notZero]}
                 />
             </div>
 
-            <div className="Field-container">
-              <label className="Field-label">Medication</label>
+            <div>
               <Field
                 className="Field-input"
+                component={renderField}
+                label="Medication"
                 name="medication"
-                component="input"
                 type="number"
                 placeholder="Quantity"
+                validate={[required, number, notZero]}
               />
             </div>
 
-            <div className="Field-container">
-              <label className="Field-label">Ammunition</label>
+            <div>
               <Field
                 className="Field-input"
+                component={renderField}
+                label="Ammunition"
                 name="ammunition"
-                component="input"
                 type="number"
                 placeholder="Quantity"
+                validate={[required, number, notZero]}
               />
             </div>
 
           </div>
 
-        <div>
-          <button type="submit">
+          <div>
+            <label style={{fontSize: 'medium', fontWeight: 'bold', marginTop: 10}}>Location</label>
+            <Field
+              name="map"
+              component={FullMap}
+              input={props.coords}
+            />
+
+          </div>
+
+        <div style={{margin: 15}}>
+          <Button type="submit">
             Register Survivor
-          </button>
+          </Button>
         </div>
-      </form>
+      </Form>
       </div>
     );
-  }
+  //}
 }
 
 export default reduxForm({

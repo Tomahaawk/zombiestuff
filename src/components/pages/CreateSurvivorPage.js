@@ -1,13 +1,20 @@
 import React from 'react';
+import { geolocated } from 'react-geolocated';
 import SurvivorCreate from '../SurvivorCreate';
 
-const CreateSurvivorPage = () => {
+const CreateSurvivorPage = (props) => {
+
   return(
     <div>
       <h2>Register a new survivor</h2>
-      <SurvivorCreate />
+      <SurvivorCreate isGeolocationEnabled={props.isGeolocationEnabled} coords={props.coords} />
     </div>
   );
 };
 
-export default CreateSurvivorPage;
+export default geolocated({
+  positionOptions: {
+    enableHighaccuracy: true
+  },
+  userDecisionTimeout: 10000
+}) (CreateSurvivorPage);

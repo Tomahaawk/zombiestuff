@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import SurvivorList from './components/SurvivorList';
-import CreateSurvivorPage from './components/pages/CreateSurvivorPage';
 import TopMenu from './components/TopMenu';
 import logo from './logo.svg';
 import './App.css';
