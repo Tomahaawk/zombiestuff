@@ -15,7 +15,7 @@ class SurvivorList extends Component {
   render() {
 
     return (
-      <Card style={{height: `auto`}}>
+      <Card style={{height: `auto`, backgroundColor:`rgba(255,255,255,0.5)`}}>
         <div className="Survivor-list-container">
           <SearchBar />
           <div className="Survivor-table-container">

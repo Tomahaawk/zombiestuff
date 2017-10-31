@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Alert } from 'reactstrap';
-import { survivorCreate } from '../actions';
+import { survivorCreate, resetLatlon, resetErrorMessage } from '../actions';
 import SurvivorForm from './SurvivorForm';
 
 class SurvivorCreate extends Component {
+
+  componentWillUnmount() {
+    this.props.resetLatlon();
+    this.props.resetErrorMessage();
+  }
+
+  componentWillMount() {
+    this.props.resetLatlon();
+  }
 
   concatInventory({water, food, medication, ammunition}) {
     var inventoryItems = '';
@@ -82,12 +91,12 @@ class SurvivorCreate extends Component {
 
 const mapStateToProps = (state) => {
   console.log(state);
-  const { name, age, gender, items, error, response } = state.survivorForm;
-  //we can access mapProps reducer and get the
+  const { error, response } = state.survivorForm;
+  //we can access mapProps store and get the
   //latitude and longitude that are being updated inside FullMap onMapClick method.
   const { latitude, longitude } = state.mapProps;
 
-  return { name, age, gender, items, latitude, longitude, error, response };
+  return { latitude, longitude, error, response };
 };
 
-export default connect(mapStateToProps, { survivorCreate })(SurvivorCreate);
+export default connect(mapStateToProps, { survivorCreate, resetLatlon, resetErrorMessage })(SurvivorCreate);

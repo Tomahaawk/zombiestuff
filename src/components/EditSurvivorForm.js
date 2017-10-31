@@ -6,16 +6,22 @@ import { singleSurvivorFetch } from '../actions';
 import FullMap from './FullMap';
 import '../css/SurvivorForm.css';
 
+const required = value => (value ? undefined : 'Required')
+const number = value => value && isNaN(Number(value)) ? 'Must be a number' : undefined
+const notZero = value => value < 0 ? 'Must be a valid number' : undefined
 
 const renderField = ({
   input,
   label,
   placeholder,
   type,
+  meta: { touched, error }
 }) => (
   <div className="Field-container">
     <label className="Field-label">{label}</label>
     <input {...input} placeholder={placeholder} type={type} className="Field-input" />
+    { touched &&
+      ((error && <span style={{marginTop: 5, color: "red"}}>{error}</span>))}
   </div>
 )
 
@@ -23,10 +29,13 @@ const renderRadio = ({
   input,
   label,
   type,
+  meta: { touched, error }
 }) => (
   <div style={{margin: 5}}>
     <input {...input} type={type} />
     <label style={{marginLeft: 5}}>{label}</label>
+    { touched &&
+      ( (error && <span style={{marginTop: 5, color: "red"}}>{error}</span>) )}
   </div>
 )
 
@@ -67,9 +76,7 @@ let EditSurvivorForm = (props) => {
   const { handleSubmit, load, params, coords, manualChange } = props;
 
   const {lonlat} = props.initialValues;
-  //console.log(coords, manualChange);
 
-  //const coords2 = formatCoords(lonlat);
   const coords2 = coordsManuallyChanged(manualChange, coords, lonlat);
   return(
     <div className="Container">
@@ -81,6 +88,7 @@ let EditSurvivorForm = (props) => {
             type="text"
             label="Name"
             placeholder="Survivor Name"
+            validate={[required]}
           />
         </div>
 
@@ -91,6 +99,7 @@ let EditSurvivorForm = (props) => {
             type="text"
             label="Age"
             placeholder="Survivor Age"
+            validate={[required, number, notZero]}
           />
         </div>
 
@@ -110,6 +119,7 @@ let EditSurvivorForm = (props) => {
                 type="radio"
                 value="F"
                 label="Female"
+                validate={[required]}
               />
           </div>
         </div>

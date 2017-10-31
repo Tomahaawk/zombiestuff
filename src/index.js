@@ -15,8 +15,8 @@ import App from './App';
 import ReportsPage from './components/pages/ReportsPage';
 import SurvivorListPage from './components/pages/SurvivorListPage';
 import CreateSurvivorPage from './components/pages/CreateSurvivorPage';
-//import EditSurvivorForm from './components/EditSurvivorForm';
 import SurvivorEdit from './components/SurvivorEdit';
+import TradeForm from './components/TradeForm';
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 const history = syncHistoryWithStore(browserHistory, store);
@@ -29,6 +29,7 @@ ReactDOM.render(
         <Route path="register-survivor" component={CreateSurvivorPage} />
         <Route path="survivors-list" component={SurvivorListPage}/>
         <Route path="edit-survivor/:location" component={SurvivorEdit} />
+        <Route path="trade" component={TradeForm} />
       </Route>
     </Router>
   </Provider>,

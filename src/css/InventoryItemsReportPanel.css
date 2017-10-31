@@ -13,9 +13,19 @@
   align-items: flex-start;
 }
 
+.Chart-container-iirp {
+    align-self: center;
+}
+
 .Description {
-  font-size: 100%;
+  font-size: 120%;
   font-weight: bold;
+  color: #303030;
+}
+
+.Description-text-iirp {
+  font-size: 120%;
+  color: #000000
 }
 
 .InfoBox-inside-iirp {

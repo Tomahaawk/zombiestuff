@@ -16,7 +16,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, latitude: action.payload.latitude, longitude: action.payload.longitude, manualChange: true };
 
     case LATLON_RESET:
-      return {state, manualChange: false}
+      return {...state, ...INITIAL_STATE, manualChange: false}
 
     default:
       return state;

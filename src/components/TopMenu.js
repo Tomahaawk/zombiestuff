@@ -4,24 +4,11 @@ import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } f
 import '../css/TopMenu.css';
 
 class TopMenu extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOpen: false
-    };
-  }
-
-  toggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
 
 
   render() {
     return(
-      
+
         /*<div>
         <Navbar color="faded" light expand="md">
           <NavbarBrand>Zombie Survival Social Network</NavbarBrand>
@@ -47,6 +34,7 @@ class TopMenu extends Component {
           <Link to="/survivors-list"><button className="Sidemenu-button">Survivors List</button></Link>
           <Link to="/register-survivor"><button className="Sidemenu-button">Register Survivor</button></Link>
           <Link to="/reports"><button className="Sidemenu-button">Reports</button></Link>
+          <Link to="/trade"><button className="Sidemenu-button">Trades</button></Link>
       </div>
     );
   }

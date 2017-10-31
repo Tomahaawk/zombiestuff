@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: row;
   background-image: url('../asserts/mist-bg.jpg');
-  background-attachment: scroll;
 }
 
 .Survivor-panel-style-slp {

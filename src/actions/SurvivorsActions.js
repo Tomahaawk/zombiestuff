@@ -7,7 +7,9 @@ import {
   SURVIVOR_UPDATE,
   SURVIVOR_FLAG_INFECTED_SUCCESS,
   SURVIVOR_EDIT_SUCCESS,
-  LATLON_RESET
+  SURVIVOR_EDIT_FAIL,
+  LATLON_RESET,
+  SURVIVOR_ERROR_RESET
  } from './types';
 
 export const survivorsFetch = () => {
@@ -55,8 +57,11 @@ export const survivorEdit = ({ id, name, age, gender, latitude, longitude }) => 
     .then((response) => {
       console.log(response);
       dispatch({ type: SURVIVOR_EDIT_SUCCESS, payload: response.status });
-      dispatch({ type: LATLON_RESET });
-    });
+    })
+    .catch((error) => {
+      console.log(error);
+      editSurvivorFail(dispatch);
+    })
   }
 }
 
@@ -85,7 +90,13 @@ const createSurvivorFail = (dispatch) => {
   dispatch({
     type: SURVIVOR_CREATE_FAIL
   })
-}
+};
+
+const editSurvivorFail = (dispatch) => {
+  dispatch({
+    type: SURVIVOR_EDIT_FAIL
+  })
+};
 
 export const survivorUpdate = ({ prop, value }) => {
   return {
@@ -97,5 +108,11 @@ export const survivorUpdate = ({ prop, value }) => {
 export const resetLatlon = () => {
   return{
     type: LATLON_RESET
+  }
+}
+
+export const resetErrorMessage = () => {
+  return {
+    type: SURVIVOR_ERROR_RESET
   }
 }

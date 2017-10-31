@@ -60,7 +60,7 @@ class SurvivorInfoPanel extends Component {
     return(
       <div>
         <div>
-          <Card>
+          <Card style={styles.cardStyle}>
             <CardBody>
               <div style={styles.innerCardStyle}>
                 <CardTitle>{singleSurvivor.name}</CardTitle>
@@ -101,6 +101,10 @@ const styles = {
   containerStyle: {
     margin: 20,
     padding: 10,
+  },
+
+  cardStyle: {
+    backgroundColor:`rgba(255,255,255,0.5)`
   },
 
   innerCardStyle: {

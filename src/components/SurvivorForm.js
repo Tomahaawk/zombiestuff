@@ -39,7 +39,6 @@ const renderRadio = ({
 
 
 let SurvivorForm = (props) => {
-  //render() {
     const { handleSubmit } = props;
     return(
       <div className="Container">
@@ -64,7 +63,7 @@ let SurvivorForm = (props) => {
               type="text"
               label="Age"
               placeholder="Survivor Age"
-              validate={[required]}
+              validate={[required, number, notZero]}
             />
         </div>
 
@@ -160,9 +159,8 @@ let SurvivorForm = (props) => {
       </Form>
       </div>
     );
-  //}
 }
 
 export default reduxForm({
-  form: 'survivor-form'
+  form: 'survivorRegisterForm'
 })(SurvivorForm);

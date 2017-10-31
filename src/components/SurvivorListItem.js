@@ -8,7 +8,6 @@ class SurvivorListItem extends Component {
       return "Yes"
     } else {
       return "No"
-      //survivor["infected?"].toString()
     }
   }
 

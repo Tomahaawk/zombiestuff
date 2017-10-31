@@ -13,18 +13,17 @@
   align-items: flex-start;
 }
 
+.Chart-container-irp {
+    align-self: center;
+}
+
 .Description {
-  font-size: 100%;
+  font-size: 120%;
   font-weight: bold;
+  color: #303030;
 }
 
-.Stats-infected {
-  font-size: 150%;
-  color: #f60b0b;
-
-}
-
-.Stats-non-infected {
-  font-size: 150%;
-  color: #82ca9d;
+.Description-text-irp {
+  font-size: 120%;
+  color: #000000;
 }

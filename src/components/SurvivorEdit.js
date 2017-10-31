@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router'
 import { Alert } from 'reactstrap';
 import { survivorEdit, resetLatlon } from '../actions';
 import EditSurvivorForm from './EditSurvivorForm';
+import '../css/EditSurvivorPage.css';
+
 
 class SurvivorEdit extends Component {
 
@@ -28,12 +31,35 @@ class SurvivorEdit extends Component {
     return coords;
   }
 
+  checkEditResponse(error, response) {
+    if(error === '' && response === null) {
+      return;
+    }
+    else {
+      if (error === '' && response === 200) {
+        return (
+          <Alert color="success" >
+            Survivor updated with success!
+          </Alert>
+        )
+
+      } else {
+        return (
+          <Alert color="danger" >
+            {error}
+          </Alert>
+        );
+      }
+    }
+  }
+
   render() {
-    const { coords, manualChange } = this.props;
+    const { coords, manualChange, response, error } = this.props;
 
     return(
-      <div>
+      <div className="Container-style-es">
         <EditSurvivorForm onSubmit={this.handleSubmit.bind(this)} coords={this.loadCoords()} manualChange={manualChange} />
+        {this.checkEditResponse(error, response)}
       </div>
     );
   }
@@ -41,9 +67,11 @@ class SurvivorEdit extends Component {
 
 const mapStateToProps = (state) => {
   console.log(state);
+  const { error, response } = state.survivorForm;
   const { latitude, longitude, manualChange } = state.mapProps;
 
-  return {latitude, longitude, manualChange};
+  console.log(response);
+  return {latitude, longitude, manualChange, error, response};
 }
 
 export default connect(mapStateToProps, { survivorEdit, resetLatlon })(SurvivorEdit);

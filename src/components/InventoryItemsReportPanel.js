@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BarChart, Bar, Legend, CartesianGrid, Tooltip } from 'recharts';
 import { infectedPointsReportFetch, inventoryReportFetch } from '../actions';
+import InventoryChart from './InventoryChart';
 import '../css/InventoryItemsReportPanel.css';
 
 class InventoryItemsReportPanel extends Component {
@@ -21,42 +21,13 @@ class InventoryItemsReportPanel extends Component {
     ];
 
     return(
-      <div className="Container-iirp">
-        <div>
-          <BarChart width={500} height={400} data={data}>
-            <CartesianGrid strokeDasharray="2 2"/>
-            <Tooltip />
-            <Legend dataKey="name" />
-            <Bar dataKey="total" fill="#8884d8" />
-            <Bar dataKey="healthy" fill="#82ca9d" />
-          </BarChart>
-        </div>
-
-        <div className="InfoBox-iirp">
-          <div>
-            <text className="Description"> {inventory.description} </text>
-          </div>
-          <div className="InfoBox-inside-iirp">
-            <div>
-              <text> Healthy: </text>
-              <text style={{fontSize:'150%', color:'#8884d8'}}> {roundedAvgHeatlhy.toFixed(2)} </text>
-            </div>
-            <div>
-              <text> Total: </text>
-              <text style={{fontSize:'150%', color:'#82ca9d'}}> {roundedAvgPerson.toFixed(2)} </text>
-            </div>
-          </div>
-        </div>
-
-        <div className="InfoBox-iirp">
-          <div>
-            <text className="Description"> {infectedPoints.description} </text>
-          </div>
-          <div>
-            <text style={{fontSize:'150%', color:'#d6c065'}}> {infectedPoints.total_points_lost} </text>
-          </div>
-        </div>
-      </div>
+      <InventoryChart
+        data={data}
+        inventory={inventory}
+        infectedPoints={infectedPoints}
+        roundedAvgHeatlhy={roundedAvgHeatlhy}
+        roundedAvgPerson={roundedAvgPerson}
+      />
     );
   }
 }

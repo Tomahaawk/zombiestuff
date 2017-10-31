@@ -1,0 +1,20 @@
+.Container-style-rp {
+  background-image: url('../asserts/mist-bg.jpg');
+
+}
+
+.Inner-container-style-rp {
+  height: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.Header-style-rp {
+  padding: 10px;
+  color: #282828;
+}
+
+.Card-style-rp {
+  background-color: rgba(255,255,255,0.5);
+}
