@@ -8,10 +8,12 @@ import '../css/EditSurvivorPage.css';
 
 class SurvivorEdit extends Component {
 
+  //Reset the coords so when the map is shown again, it shows the position (0 0) instead of the position used to create a survivor
   componentWillUnmount() {
     this.props.resetLatlon();
   }
 
+  //reseting it on componentWillMount also prevents the center to be pre-defined in case the user clicked on the map when looking at the survivor list
   componentWillMount() {
     this.props.resetLatlon();
   }
@@ -57,6 +59,7 @@ class SurvivorEdit extends Component {
 
     return(
       <div>
+        <h2 className="Header-style-csp">Edit survivor</h2>
         <EditSurvivorForm onSubmit={this.handleSubmit.bind(this)} coords={this.loadCoords()} manualChange={manualChange} />
         {this.checkEditResponse(error, response)}
       </div>

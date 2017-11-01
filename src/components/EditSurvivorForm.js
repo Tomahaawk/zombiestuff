@@ -63,6 +63,8 @@ const labelMap = (coords) => {
   }
 }
 
+//if the user changes the coords manually, the map center moves;
+//Default value: FALSE
 const coordsManuallyChanged = (manualChange, coords, lonlat) => {
   if(!manualChange) {
     //const { lonlat } = this.props.initialValues;

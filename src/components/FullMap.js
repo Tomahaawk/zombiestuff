@@ -5,6 +5,7 @@ import MapLocationPanel from './MapLocationPanel';
 
 class FullMap extends React.Component {
 
+  //changes the current center (lat, lon)
   onMapClick(event) {
     const latlon = event.latLng;
     const latitude = latlon.lat();

@@ -25,6 +25,7 @@ class SurvivorInfoPanel extends Component {
     });
   }
 
+  //Gets the coords from JSON format (POINT (0 0)) and convert it to (latitude, longitude) format;
   formatCoords = (lonLat) => {
       const newLonLatString = lonLat.replace('POINT ', '').replace(/[()]/g, '');
       const coordsString =  newLonLatString.split(" ");
@@ -36,6 +37,7 @@ class SurvivorInfoPanel extends Component {
 
   }
 
+  //Verify if the selected survivor has a know location
   renderFullMap = (lonLat) => {
     if(lonLat !== null && lonLat !== undefined) {
       const coords = this.formatCoords(lonLat);

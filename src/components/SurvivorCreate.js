@@ -6,6 +6,8 @@ import SurvivorForm from './SurvivorForm';
 
 class SurvivorCreate extends Component {
 
+  //Reset the coords so when the map is shown again, it shows the position (0 0) instead of the position used to create a survivor
+  //Resets the error message in case the user leaves the screen when an error is being shown
   componentWillUnmount() {
     this.props.resetLatlon();
     this.props.resetErrorMessage();
@@ -42,6 +44,8 @@ class SurvivorCreate extends Component {
     this.props.survivorCreate({ name, age, gender, items, latitude, longitude });
   }
 
+  //If the user choses to let the browser access his location, the latlont will be locked at the place found
+  //Case the users choses to NOT give his location, he can freely change the location
   loadCoords(isGeolocationEnabled, coords) {
     if (isGeolocationEnabled && coords !== null) {
       //const coords = {latitude: 0, longitude: 0};
@@ -55,7 +59,7 @@ class SurvivorCreate extends Component {
     }
   }
 
-
+  //Verify for errors when using REST
   checkCreateResponse(error, response) {
     if(error === '' && response !== 201) {
       return;
