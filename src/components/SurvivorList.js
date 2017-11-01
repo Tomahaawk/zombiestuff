@@ -19,7 +19,7 @@ class SurvivorList extends Component {
         <div className="Survivor-list-container">
           <SearchBar />
           <div className="Survivor-table-container">
-            <Table inverse hover striped id="myTable">
+            <Table hover inverse striped id="myTable">
               <thead>
                 <tr>
                   <th>Name</th>
@@ -27,9 +27,9 @@ class SurvivorList extends Component {
                   <th>Infected</th>
                 </tr>
               </thead>
-              <tbody>
-                <SurvivorListItem survivors={this.props.survivorsList} onClick={this.props.onClick}/>
-              </tbody>
+                <tbody>
+                  <SurvivorListItem survivors={this.props.survivorsList} onClick={this.props.onClick}/>
+                </tbody>
             </Table>
           </div>
         </div>

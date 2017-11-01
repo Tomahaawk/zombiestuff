@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { Form, Button } from 'reactstrap';
+import { Form, Button, Label } from 'reactstrap';
+import '../css/SurvivorForm.css';
 
 const renderField = ({
   input,
@@ -9,9 +9,9 @@ const renderField = ({
   placeholder,
   type
 }) => (
-  <div>
-    <label> {label} </label>
-    <input {...input} placeholder={placeholder} type={type} />
+  <div className="Field-container">
+    <Label className="Field-label"> {label} </Label>
+    <input {...input} placeholder={placeholder} type={type} className="Field-input" />
   </div>
 )
 
@@ -19,8 +19,8 @@ let TradeForm = (props) => {
   const { handleSubmit } = props;
 
   return(
-    <div>
-      <Form onSubmit={handleSubmit}>
+    <div className="Container">
+      <Form onSubmit={handleSubmit} className="Form-container">
         <div>
           <label>Items Wanted</label>
           <div>
@@ -109,7 +109,7 @@ let TradeForm = (props) => {
 
         <div style={{margin: 15}}>
           <Button type="submit">
-            Trade Items
+            Trade
           </Button>
         </div>
       </Form>

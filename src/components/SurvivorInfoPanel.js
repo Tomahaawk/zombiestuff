@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Card, CardBody, CardTitle, CardSubtitle, Button, Input,
   Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { reportInfected } from '../actions';
 import FullMap from './FullMap';
 
 class SurvivorInfoPanel extends Component {
@@ -28,7 +26,6 @@ class SurvivorInfoPanel extends Component {
   }
 
   formatCoords = (lonLat) => {
-    //singleSurvivor.lonlat
       const newLonLatString = lonLat.replace('POINT ', '').replace(/[()]/g, '');
       const coordsString =  newLonLatString.split(" ");
       const latitude = Number(coordsString[0]);
@@ -42,7 +39,7 @@ class SurvivorInfoPanel extends Component {
   renderFullMap = (lonLat) => {
     if(lonLat !== null && lonLat !== undefined) {
       const coords = this.formatCoords(lonLat);
-      //console.log(coords);
+
       return <FullMap input={coords} />;
 
     } else {
@@ -55,7 +52,6 @@ class SurvivorInfoPanel extends Component {
     const { singleSurvivor } = this.props;
     const infectedId = singleSurvivor.id;
     const flaggerId = this.state.flaggerId;
-    //const coords = this.formatCoords(singleSurvivor.lonlat);
 
     return(
       <div>
@@ -72,7 +68,7 @@ class SurvivorInfoPanel extends Component {
               </div>
               <div>
                 <Button onClick={this.toggleModal} style={styles.buttonStyle}> Flag Infected </Button>
-                <Link to={`/edit-survivor/${singleSurvivor.location}`}><Button style={styles.buttonStyle}> Edit </Button></Link>
+                <Link to={`/edit-survivor/${singleSurvivor.id}`}><Button style={styles.buttonStyle}> Edit </Button></Link>
               </div>
             </CardBody>
           </Card>

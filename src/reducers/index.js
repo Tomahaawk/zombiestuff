@@ -6,6 +6,7 @@ import SurvivorFormReducer from './SurvivorFormReducer';
 import FlagSurvivorReducer from './FlagSurvivorReducer';
 import ReportsReducer from './ReportsReducer';
 import MapReducer from './MapReducer';
+import InventoryReducer from './InventoryReducer';
 
 export default combineReducers ({
   survivorList: SurvivorsReducer,
@@ -13,6 +14,7 @@ export default combineReducers ({
   flagges: FlagSurvivorReducer,
   reports: ReportsReducer,
   mapProps: MapReducer,
+  inventory: InventoryReducer,
   form: formReducer,
   routing: routerReducer
 });

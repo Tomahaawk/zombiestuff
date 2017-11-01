@@ -6,7 +6,7 @@ import '../../css/CreateSurvivorPage.css';
 const CreateSurvivorPage = (props) => {
 
   return(
-    <div className="Container-style-csp">
+    <div>
       <h2 className="Header-style-csp">Register a new survivor</h2>
       <SurvivorCreate isGeolocationEnabled={props.isGeolocationEnabled} coords={props.coords} />
     </div>

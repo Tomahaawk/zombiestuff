@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router'
 import { Alert } from 'reactstrap';
 import { survivorEdit, resetLatlon } from '../actions';
 import EditSurvivorForm from './EditSurvivorForm';
@@ -54,10 +53,10 @@ class SurvivorEdit extends Component {
   }
 
   render() {
-    const { coords, manualChange, response, error } = this.props;
+    const { manualChange, response, error } = this.props;
 
     return(
-      <div className="Container-style-es">
+      <div>
         <EditSurvivorForm onSubmit={this.handleSubmit.bind(this)} coords={this.loadCoords()} manualChange={manualChange} />
         {this.checkEditResponse(error, response)}
       </div>

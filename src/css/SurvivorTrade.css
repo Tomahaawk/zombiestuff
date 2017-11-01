@@ -1,0 +1,30 @@
+.Trade-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.Inventory-fetch-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  flex: 1;
+}
+
+.Inventory-id-input {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  width: 400px
+}
+
+.Inventory-search-button {
+  margin-left: 5px;
+}
+
+.Inventory-items-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}

@@ -73,7 +73,7 @@ const coordsManuallyChanged = (manualChange, coords, lonlat) => {
 }
 
 let EditSurvivorForm = (props) => {
-  const { handleSubmit, load, params, coords, manualChange } = props;
+  const { handleSubmit, coords, manualChange } = props;
 
   const {lonlat} = props.initialValues;
 

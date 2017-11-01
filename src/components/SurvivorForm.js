@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Button, Form, Label, Alert } from 'reactstrap';
+import { Button, Form, Label } from 'reactstrap';
 import FullMap from './FullMap';
 import '../css/SurvivorForm.css';
 
