@@ -2,6 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Form, Button } from 'reactstrap';
+import { PulseLoader } from 'react-spinners';
 import { singleSurvivorFetch } from '../actions';
 import FullMap from './FullMap';
 import '../css/SurvivorForm.css';
@@ -38,6 +39,22 @@ const renderRadio = ({
       ( (error && <span style={{marginTop: 5, color: "red"}}>{error}</span>) )}
   </div>
 )
+
+const verifyLoading = (isLoading) => {
+  if(isLoading) {
+    return(
+      <PulseLoader
+        color={'#4A4A4A'}
+        loading={isLoading}
+      />
+    );
+  }
+  return (
+    <Button type="submit">
+      Save Changes
+    </Button>
+  );
+}
 
 const formatCoords = (lonLat) => {
   //singleSurvivor.lonlat
@@ -135,9 +152,7 @@ let EditSurvivorForm = (props) => {
         </div>
 
         <div style={{margin: 15}}>
-          <Button type="submit">
-            Save Changes
-          </Button>
+          {verifyLoading(props.isLoading)}
         </div>
       </Form>
     </div>

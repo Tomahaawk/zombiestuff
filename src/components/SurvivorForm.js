@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Button, Form, Label } from 'reactstrap';
+import { PulseLoader } from 'react-spinners';
 import FullMap from './FullMap';
 import '../css/SurvivorForm.css';
 
@@ -37,6 +38,21 @@ const renderRadio = ({
   </div>
 )
 
+const verifyLoading = (isLoading) => {
+  if(isLoading) {
+    return(
+      <PulseLoader
+        color={'#4A4A4A'}
+        loading={isLoading}
+      />
+    );
+  }
+  return(
+    <Button type="submit">
+      Register Survivor
+    </Button>
+  );
+}
 
 let SurvivorForm = (props) => {
     const { handleSubmit } = props;
@@ -152,9 +168,7 @@ let SurvivorForm = (props) => {
           </div>
 
         <div style={{margin: 15}}>
-          <Button type="submit">
-            Register Survivor
-          </Button>
+          {verifyLoading(props.isLoading)}
         </div>
       </Form>
       </div>

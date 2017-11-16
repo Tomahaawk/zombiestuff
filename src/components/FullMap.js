@@ -15,7 +15,7 @@ class FullMap extends React.Component {
   }
 
   render() {
-    //console.log(this.props.input);
+
     return(
       <MapLocationPanel
         coords={this.props.input}

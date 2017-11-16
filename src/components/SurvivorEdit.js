@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Alert } from 'reactstrap';
-import { survivorEdit, resetLatlon } from '../actions';
+import { ToastContainer, toast } from 'react-toastify';
+import { survivorEdit, resetLatlon, resetErrorMessage } from '../actions';
 import EditSurvivorForm from './EditSurvivorForm';
 import '../css/EditSurvivorPage.css';
 
 
 class SurvivorEdit extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoading: false
+    }
+  }
 
   //Reset the coords so when the map is shown again, it shows the position (0 0) instead of the position used to create a survivor
   componentWillUnmount() {
@@ -18,8 +25,15 @@ class SurvivorEdit extends Component {
     this.props.resetLatlon();
   }
 
+  changeLoadingState = () => {
+    this.setState({
+      isLoading: !this.state.isLoading
+    });
+  }
 
   handleSubmit(values) {
+    this.changeLoadingState();
+
     const { id, name, age, gender } = values;
     const { latitude, longitude } = this.props;
 
@@ -32,26 +46,32 @@ class SurvivorEdit extends Component {
     return coords;
   }
 
+  //Verify for errors when using REST
   checkEditResponse(error, response) {
-    if(error === '' && response === null) {
+    if(error === '' && response !== 200) {
       return;
     }
     else {
       if (error === '' && response === 200) {
-        return (
-          <Alert color="success" >
-            Survivor updated with success!
-          </Alert>
-        )
+        this.notifySuccess();
+        this.props.resetErrorMessage();
+        this.changeLoadingState();
 
       } else {
-        return (
-          <Alert color="danger" >
-            {error}
-          </Alert>
-        );
+        this.notifyFail(error);
+        this.props.resetErrorMessage();
+        this.changeLoadingState();
+
       }
     }
+  }
+
+  notifySuccess = () => {
+    toast.success("Surivor updated with success!");
+  }
+
+  notifyFail = (error) => {
+    toast.error(error);
   }
 
   render() {
@@ -60,7 +80,14 @@ class SurvivorEdit extends Component {
     return(
       <div>
         <h2 className="Header-style-csp">Edit survivor</h2>
-        <EditSurvivorForm onSubmit={this.handleSubmit.bind(this)} coords={this.loadCoords()} manualChange={manualChange} />
+        <EditSurvivorForm onSubmit={this.handleSubmit.bind(this)} coords={this.loadCoords()} manualChange={manualChange} isLoading={this.state.isLoading} />
+        <ToastContainer
+          position="top-center"
+          type="default"
+          autoClose={5000}
+          hideProgressBar
+          closeOnClick
+        />
         {this.checkEditResponse(error, response)}
       </div>
     );
@@ -76,4 +103,4 @@ const mapStateToProps = (state) => {
   return {latitude, longitude, manualChange, error, response};
 }
 
-export default connect(mapStateToProps, { survivorEdit, resetLatlon })(SurvivorEdit);
+export default connect(mapStateToProps, { survivorEdit, resetLatlon, resetErrorMessage })(SurvivorEdit);
